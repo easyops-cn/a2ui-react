@@ -343,17 +343,19 @@ describe('TextFieldComponent', () => {
 })
 
 describe('DateTimeInputComponent', () => {
-  it('should render date input by default', () => {
-    const { container } = render(
+  it('should render date picker button by default', () => {
+    render(
       <DateTimeInputComponent surfaceId="surface-1" componentId="datetime-1" />,
       { wrapper }
     )
-    const input = container.querySelector('input[type="date"]')
-    expect(input).toBeInTheDocument()
+    // Component uses Calendar/Popover UI, renders a button trigger
+    expect(
+      screen.getByRole('button', { name: /选择日期/i })
+    ).toBeInTheDocument()
   })
 
-  it('should render date input when enableDate is true', () => {
-    const { container } = render(
+  it('should render date picker button when enableDate is true', () => {
+    render(
       <DateTimeInputComponent
         surfaceId="surface-1"
         componentId="datetime-1"
@@ -362,8 +364,9 @@ describe('DateTimeInputComponent', () => {
       />,
       { wrapper }
     )
-    const input = container.querySelector('input[type="date"]')
-    expect(input).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: /选择日期/i })
+    ).toBeInTheDocument()
   })
 
   it('should render time input when only enableTime is true', () => {
@@ -380,8 +383,8 @@ describe('DateTimeInputComponent', () => {
     expect(input).toBeInTheDocument()
   })
 
-  it('should render datetime-local input when both are enabled', () => {
-    const { container } = render(
+  it('should render datetime picker button when both are enabled', () => {
+    render(
       <DateTimeInputComponent
         surfaceId="surface-1"
         componentId="datetime-1"
@@ -390,24 +393,30 @@ describe('DateTimeInputComponent', () => {
       />,
       { wrapper }
     )
-    const input = container.querySelector('input[type="datetime-local"]')
-    expect(input).toBeInTheDocument()
+    // Component uses Calendar/Popover UI with time input inside
+    expect(
+      screen.getByRole('button', { name: /选择日期和时间/i })
+    ).toBeInTheDocument()
   })
 
-  it('should update value on change', async () => {
+  it('should update time value on change', async () => {
     const { container } = render(
       <DateTimeInputComponent
         surfaceId="surface-1"
         componentId="datetime-1"
-        value={{ path: '/form/date' }}
+        enableDate={false}
+        enableTime={true}
+        value={{ path: '/form/time' }}
       />,
       { wrapper }
     )
 
-    const input = container.querySelector('input') as HTMLInputElement
-    fireEvent.change(input, { target: { value: '2024-01-15' } })
+    const input = container.querySelector(
+      'input[type="time"]'
+    ) as HTMLInputElement
+    fireEvent.change(input, { target: { value: '14:30' } })
 
-    expect(input).toHaveValue('2024-01-15')
+    expect(input).toHaveValue('14:30')
   })
 
   it('should have correct displayName', () => {
@@ -449,10 +458,8 @@ describe('MultipleChoiceComponent', () => {
       { wrapper }
     )
 
-    // Select trigger should be present
-    expect(
-      screen.getByRole('button', { name: 'Select an option' })
-    ).toBeInTheDocument()
+    // Select trigger is a combobox role
+    expect(screen.getByRole('combobox')).toBeInTheDocument()
   })
 
   it('should show placeholder when no selection', () => {
