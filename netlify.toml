@@ -1,3 +1,9 @@
+[[redirects]]
+  from = "/"
+  to = "/a2ui-react/"
+  status = 302
+  force = true
+
 [[headers]]
   for = "*.js" # js files should be set this way
   [headers.values]
