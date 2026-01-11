@@ -20,7 +20,7 @@ npm install -w playground @uiw/react-codemirror @codemirror/lang-json
 
 ### 2. Link Main Library
 
-The playground uses the main `@elevo-cn/a2ui-react` library as a workspace dependency. Ensure the library is built:
+The playground uses the main `@easyops-cn/a2ui-react` library as a workspace dependency. Ensure the library is built:
 
 ```bash
 # Build the main library
@@ -90,7 +90,7 @@ import { json } from '@codemirror/lang-json'
 ### A2UIRender Integration
 
 ```typescript
-import { A2UIRender, type A2UIMessage } from '@elevo-cn/a2ui-react/0.8'
+import { A2UIRender, type A2UIMessage } from '@easyops-cn/a2ui-react/0.8'
 
 // Parse JSON and render
 const messages: A2UIMessage[] = JSON.parse(jsonContent)

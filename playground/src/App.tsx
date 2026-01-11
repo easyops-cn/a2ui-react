@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react'
-import type { A2UIMessage, A2UIAction } from '@elevo-cn/a2ui-react/0.8'
+import type { A2UIMessage, A2UIAction } from '@easyops-cn/a2ui-react/0.8'
 import { Header } from './components/Header'
 import { ThemeToggle } from './components/ThemeToggle'
 import { JsonEditor } from './components/JsonEditor'

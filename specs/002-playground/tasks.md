@@ -35,7 +35,7 @@ playground/
 
 - [x] T001 Install CodeMirror dependencies: `npm install -w playground @uiw/react-codemirror @codemirror/lang-json`
 - [x] T002 Install lucide-react for icons: `npm install -w playground lucide-react`
-- [x] T003 Configure Vite to resolve @elevo-cn/a2ui-react workspace dependency in playground/vite.config.ts
+- [x] T003 Configure Vite to resolve @easyops-cn/a2ui-react workspace dependency in playground/vite.config.ts
 - [x] T004 [P] Create components directory structure in playground/src/components/
 - [x] T005 [P] Create data directory structure in playground/src/data/
 - [x] T006 [P] Create hooks directory structure in playground/src/hooks/

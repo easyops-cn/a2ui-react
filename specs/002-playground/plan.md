@@ -10,7 +10,7 @@ Implement an interactive playground for the A2UI React library that allows devel
 ## Technical Context
 
 **Language/Version**: TypeScript 5.9, React 19
-**Primary Dependencies**: @uiw/react-codemirror (CodeMirror 6), @codemirror/lang-json, @elevo-cn/a2ui-react, Tailwind CSS 4
+**Primary Dependencies**: @uiw/react-codemirror (CodeMirror 6), @codemirror/lang-json, @easyops-cn/a2ui-react, Tailwind CSS 4
 **Storage**: localStorage (theme preference only)
 **Testing**: Vitest + React Testing Library (inherited from root)
 **Target Platform**: Modern browsers (Chrome, Firefox, Safari, Edge), desktop 1024px+

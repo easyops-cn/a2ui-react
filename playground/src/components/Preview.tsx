@@ -3,7 +3,7 @@ import {
   A2UIRender,
   type A2UIMessage,
   type A2UIAction,
-} from '@elevo-cn/a2ui-react/0.8'
+} from '@easyops-cn/a2ui-react/0.8'
 import { ErrorDisplay } from './ErrorDisplay'
 
 interface ErrorBoundaryProps {

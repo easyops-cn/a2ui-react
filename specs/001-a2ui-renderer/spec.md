@@ -152,7 +152,7 @@ As a developer, I want to use form binding hooks in custom components so that I 
 - **SC-002**: All user interactions on rendered components trigger the onAction callback within 100ms of user input
 - **SC-003**: Custom component overrides work without modifying library source code
 - **SC-004**: Custom components can access all necessary hooks (useDispatchAction, useDataBinding, useFormBinding) from the library exports
-- **SC-005**: The library exports are accessible via the versioned path '@elevo-cn/a2ui-react/0.8'
+- **SC-005**: The library exports are accessible via the versioned path '@easyops-cn/a2ui-react/0.8'
 - **SC-006**: Nested component rendering works to at least 10 levels deep without performance degradation
 - **SC-007**: Form bindings reflect value changes immediately (within one render cycle)
 
@@ -162,4 +162,4 @@ As a developer, I want to use form binding hooks in custom components so that I 
 - React 18+ is the target runtime environment
 - TypeScript types are required for all public exports
 - Default components will be provided for common UI elements (Button, Text, etc.)
-- The versioned export path pattern (@elevo-cn/a2ui-react/0.8) follows npm package subpath exports convention
+- The versioned export path pattern (@easyops-cn/a2ui-react/0.8) follows npm package subpath exports convention

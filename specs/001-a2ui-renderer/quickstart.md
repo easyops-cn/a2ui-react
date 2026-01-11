@@ -6,15 +6,15 @@
 ## Installation
 
 ```bash
-npm install @elevo-cn/a2ui-react
+npm install @easyops-cn/a2ui-react
 # or
-pnpm add @elevo-cn/a2ui-react
+pnpm add @easyops-cn/a2ui-react
 ```
 
 ## Basic Usage
 
 ```tsx
-import { A2UIRender, A2UIMessage, A2UIAction } from '@elevo-cn/a2ui-react/0.8'
+import { A2UIRender, A2UIMessage, A2UIAction } from '@easyops-cn/a2ui-react/0.8'
 
 function App() {
   const messages: A2UIMessage[] = [
@@ -39,7 +39,7 @@ import {
   A2UIRender,
   useDispatchAction,
   ComponentRenderer,
-} from '@elevo-cn/a2ui-react/0.8'
+} from '@easyops-cn/a2ui-react/0.8'
 
 // Custom Button component
 function CustomButton({ surfaceId, componentId, child, action }) {
@@ -75,7 +75,7 @@ function App() {
 ## Data Binding in Custom Components
 
 ```tsx
-import { useDataBinding, useFormBinding } from '@elevo-cn/a2ui-react/0.8'
+import { useDataBinding, useFormBinding } from '@easyops-cn/a2ui-react/0.8'
 
 // Read-only binding
 function DisplayComponent({ surfaceId, text }) {

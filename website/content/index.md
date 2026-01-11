@@ -8,13 +8,13 @@ Supported A2UI versions:
 ## Installation
 
 ```sh
-npm install @elevo-cn/a2ui-react
+npm install @easyops-cn/a2ui-react
 ```
 
 ## Usage
 
 ```tsx
-import { A2UIRender, A2UIMessage, A2UIAction } from '@elevo-cn/a2ui-react/0.8'
+import { A2UIRender, A2UIMessage, A2UIAction } from '@easyops-cn/a2ui-react/0.8'
 
 function App() {
   const messages: A2UIMessage[] = []
@@ -32,7 +32,7 @@ function App() {
 We supports all components in A2UI standard catalog out of the box. You can override default components or add new custom components via the `components` prop, which takes a `Map<string, React.ComponentType>`.
 
 ```tsx
-import { A2UIRender, A2UIMessage, A2UIAction } from '@elevo-cn/a2ui-react/0.8'
+import { A2UIRender, A2UIMessage, A2UIAction } from '@easyops-cn/a2ui-react/0.8'
 
 const ComponentsMap = new Map<string, React.ComponentType<any>>([
   // Override default Button component with a custom one
@@ -60,7 +60,7 @@ import {
   useDispatchAction,
   ComponentRenderer,
   type ButtonComponentProps,
-} from '@elevo-cn/a2ui-react/0.8'
+} from '@easyops-cn/a2ui-react/0.8'
 
 export function CustomButtonComponent({
   surfaceId,
@@ -87,7 +87,7 @@ export function CustomButtonComponent({
 Custom switch component with data binding:
 
 ```tsx
-import { useDataBinding, useFormBinding } from '@elevo-cn/a2ui-react/0.8'
+import { useDataBinding, useFormBinding } from '@easyops-cn/a2ui-react/0.8'
 
 export function CustomSwitchComponent({
   surfaceId,

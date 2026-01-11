@@ -4,13 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-A2UI React Renderer Library (`@elevo-cn/a2ui-react`) - A React implementation for rendering A2UI (Agent-to-User Interface) specifications. This is a library package (not an application) that downstream developers consume.
+A2UI React Renderer Library (`@easyops-cn/a2ui-react`) - A React implementation for rendering A2UI (Agent-to-User Interface) specifications. This is a library package (not an application) that downstream developers consume.
 
 ## Monorepo Structure
 
 This is an npm workspaces monorepo:
 
-- Root package: `@elevo-cn/a2ui-react` - The main library
+- Root package: `@easyops-cn/a2ui-react` - The main library
 - `website/` - Documentation site using plain-blog
 - `playground/` - Live demo workspace for real-time A2UI rendering development
 
@@ -46,7 +46,7 @@ npm run build -w playground  # Build playground
 The primary entry point is `A2UIRender` component:
 
 ```tsx
-import { A2UIRender, A2UIMessage, A2UIAction } from '@elevo-cn/a2ui-react/0.8'
+import { A2UIRender, A2UIMessage, A2UIAction } from '@easyops-cn/a2ui-react/0.8'
 ;<A2UIRender messages={messages} onAction={handleAction} />
 ```
 
@@ -57,8 +57,8 @@ Custom components use hooks: `useDispatchAction`, `useDataBinding`, `useFormBind
 ## Package Exports
 
 ```javascript
-import { v0_8 } from '@elevo-cn/a2ui-react'       // Main namespace export
-import { ... } from '@elevo-cn/a2ui-react/0.8'    // Core module (A2UIRender, hooks, types)
+import { v0_8 } from '@easyops-cn/a2ui-react'       // Main namespace export
+import { ... } from '@easyops-cn/a2ui-react/0.8'    // Core module (A2UIRender, hooks, types)
 ```
 
 ## Architecture
@@ -97,9 +97,9 @@ TypeScript 5.9, React 19, Radix UI (for UI primitives), Tailwind CSS (via class-
 
 ## Active Technologies
 
-- TypeScript 5.9, React 19 + @uiw/react-codemirror (CodeMirror 6), @codemirror/lang-json, @elevo-cn/a2ui-react, Tailwind CSS 4 (002-playground)
+- TypeScript 5.9, React 19 + @uiw/react-codemirror (CodeMirror 6), @codemirror/lang-json, @easyops-cn/a2ui-react, Tailwind CSS 4 (002-playground)
 - localStorage (theme preference only) (002-playground)
 
 ## Recent Changes
 
-- 002-playground: Added TypeScript 5.9, React 19 + @uiw/react-codemirror (CodeMirror 6), @codemirror/lang-json, @elevo-cn/a2ui-react, Tailwind CSS 4
+- 002-playground: Added TypeScript 5.9, React 19 + @uiw/react-codemirror (CodeMirror 6), @codemirror/lang-json, @easyops-cn/a2ui-react, Tailwind CSS 4

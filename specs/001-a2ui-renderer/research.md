@@ -62,7 +62,7 @@ This document captures research findings for implementing the A2UIRender compone
 
 ## Decision 4: Export Structure for Versioned Path
 
-**Decision**: Create `src/0.8/index.ts` as the entry point for `@elevo-cn/a2ui-react/0.8`
+**Decision**: Create `src/0.8/index.ts` as the entry point for `@easyops-cn/a2ui-react/0.8`
 
 **Rationale**:
 
@@ -134,7 +134,7 @@ function useDispatchAction(): (
 The README.md shows:
 
 ```tsx
-import { A2UIRender, A2UIMessage, A2UIAction } from '@elevo-cn/a2ui-react/0.8'
+import { A2UIRender, A2UIMessage, A2UIAction } from '@easyops-cn/a2ui-react/0.8'
 ```
 
 Current types use `ActionPayload` instead of `A2UIAction`. The index.ts should export `ActionPayload as A2UIAction` for API consistency.

@@ -2,11 +2,11 @@
  * A2UI React Renderer - Public API
  *
  * This is the main entry point for the A2UI React renderer library.
- * Import from '@elevo-cn/a2ui-react/0.8'
+ * Import from '@easyops-cn/a2ui-react/0.8'
  *
  * @example
  * ```tsx
- * import { A2UIRender, A2UIMessage, A2UIAction } from '@elevo-cn/a2ui-react/0.8'
+ * import { A2UIRender, A2UIMessage, A2UIAction } from '@easyops-cn/a2ui-react/0.8'
  *
  * function App() {
  *   const messages: A2UIMessage[] = [...]

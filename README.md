@@ -3,7 +3,7 @@ A2UI React Renderer Library
 Usage:
 
 ```tsx
-import { A2UIRender, A2UIMessage, A2UIAction } from '@elevo-cn/a2ui-react/0.8'
+import { A2UIRender, A2UIMessage, A2UIAction } from '@easyops-cn/a2ui-react/0.8'
 
 function App() {
   const messages: A2UIMessage[] = []
@@ -19,7 +19,7 @@ function App() {
 Customize components:
 
 ```tsx
-import { A2UIRender, A2UIMessage, A2UIAction } from '@elevo-cn/a2ui-react/0.8'
+import { A2UIRender, A2UIMessage, A2UIAction } from '@easyops-cn/a2ui-react/0.8'
 
 const ComponentsMap = new Map<string, React.ComponentType<any>>([
   // Override default Button component with a custom one
@@ -41,7 +41,10 @@ function App() {
 ```
 
 ```tsx
-import { useDispatchAction, ComponentRenderer } from '@elevo-cn/a2ui-react/0.8'
+import {
+  useDispatchAction,
+  ComponentRenderer,
+} from '@easyops-cn/a2ui-react/0.8'
 
 export function CustomButtonComponent({
   surfaceId,
@@ -66,7 +69,10 @@ export function CustomButtonComponent({
 ```
 
 ```tsx
-import { useDispatchAction, ComponentRenderer } from '@elevo-cn/a2ui-react/0.8'
+import {
+  useDispatchAction,
+  ComponentRenderer,
+} from '@easyops-cn/a2ui-react/0.8'
 
 export function CustomSwitchComponent({
   surfaceId,

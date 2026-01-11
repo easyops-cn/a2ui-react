@@ -8,7 +8,7 @@
 Implement the A2UIRender component and public API exports for the A2UI React renderer library. The library already has substantial infrastructure implemented (contexts, hooks, component registry, default components). The remaining work focuses on:
 
 1. Creating the main `A2UIRender` component that matches the README.md API
-2. Setting up the versioned export path (`@elevo-cn/a2ui-react/0.8`)
+2. Setting up the versioned export path (`@easyops-cn/a2ui-react/0.8`)
 3. Adding development-mode placeholder for unknown components
 4. Ensuring all public types and hooks are properly exported
 
@@ -63,12 +63,12 @@ The constitution template is not yet customized for this project. Proceeding wit
 
 ### Not Yet Implemented
 
-| Component/Module          | Status     | Required For                              |
-| ------------------------- | ---------- | ----------------------------------------- |
-| **A2UIRender**            | ❌ Missing | Main entry component per README.md        |
-| **index.ts exports**      | ❌ Missing | Versioned path `@elevo-cn/a2ui-react/0.8` |
-| **Dev-mode placeholder**  | ❌ Missing | Unknown component handling per spec       |
-| **ComponentsMap support** | ❌ Missing | Custom component override per README.md   |
+| Component/Module          | Status     | Required For                                |
+| ------------------------- | ---------- | ------------------------------------------- |
+| **A2UIRender**            | ❌ Missing | Main entry component per README.md          |
+| **index.ts exports**      | ❌ Missing | Versioned path `@easyops-cn/a2ui-react/0.8` |
+| **Dev-mode placeholder**  | ❌ Missing | Unknown component handling per spec         |
+| **ComponentsMap support** | ❌ Missing | Custom component override per README.md     |
 
 ## Project Structure
 
