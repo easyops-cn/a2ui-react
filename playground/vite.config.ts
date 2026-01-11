@@ -15,7 +15,8 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      '@': path.resolve(__dirname, '../src'),
+      '@elevo-cn/a2ui-react/0.8': path.resolve(__dirname, '../src/0.8'),
     },
   },
 })

@@ -26,7 +26,8 @@
 
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["../src/*"],
+      "@elevo-cn/a2ui-react/0.8": ["../src/0.8/index.ts"]
     }
   },
   "include": ["src"]

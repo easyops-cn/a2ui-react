@@ -12,6 +12,7 @@ This is an npm workspaces monorepo:
 
 - Root package: `@elevo-cn/a2ui-react` - The main library
 - `website/` - Documentation site using plain-blog
+- `playground/` - Live demo workspace for real-time A2UI rendering development
 
 ## Commands
 
@@ -31,6 +32,13 @@ npm run lint:fix     # ESLint with auto-fix
 ```bash
 npm run build -w website     # Build website (outputs to website/dist/)
 npx -y serve website/dist    # Serve built website locally
+```
+
+### Playground
+
+```bash
+npm run dev -w playground    # Start playground dev server for live A2UI demos
+npm run build -w playground  # Build playground
 ```
 
 ## Library Usage (Downstream API)
@@ -86,3 +94,12 @@ Tests co-located with source (`*.test.tsx`). Uses Vitest + React Testing Library
 ## Technologies
 
 TypeScript 5.9, React 19, Radix UI (for UI primitives), Tailwind CSS (via class-variance-authority)
+
+## Active Technologies
+
+- TypeScript 5.9, React 19 + @uiw/react-codemirror (CodeMirror 6), @codemirror/lang-json, @elevo-cn/a2ui-react, Tailwind CSS 4 (002-playground)
+- localStorage (theme preference only) (002-playground)
+
+## Recent Changes
+
+- 002-playground: Added TypeScript 5.9, React 19 + @uiw/react-codemirror (CodeMirror 6), @codemirror/lang-json, @elevo-cn/a2ui-react, Tailwind CSS 4
