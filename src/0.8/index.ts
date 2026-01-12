@@ -6,14 +6,29 @@
  *
  * @example
  * ```tsx
- * import { A2UIRenderer, A2UIMessage, A2UIAction } from '@easyops-cn/a2ui-react/0.8'
+ * import { A2UIProvider, A2UIRenderer, A2UIMessage, A2UIAction } from '@easyops-cn/a2ui-react/0.8'
  *
  * function App() {
  *   const messages: A2UIMessage[] = [...]
  *   const handleAction = (action: A2UIAction) => {
  *     console.log('Action:', action)
  *   }
- *   return <A2UIRenderer messages={messages} onAction={handleAction} />
+ *   return (
+ *     <A2UIProvider messages={messages} onAction={handleAction}>
+ *       <A2UIRenderer />
+ *     </A2UIProvider>
+ *   )
+ * }
+ *
+ * // With custom middleware component that uses hooks
+ * function AppWithMiddleware() {
+ *   return (
+ *     <A2UIProvider messages={messages} onAction={handleAction}>
+ *       <MyCustomMiddleware>
+ *         <A2UIRenderer />
+ *       </MyCustomMiddleware>
+ *     </A2UIProvider>
+ *   )
  * }
  * ```
  */
@@ -27,8 +42,11 @@ export type {
   ValueSource,
 } from './types'
 
+export type { A2UIProviderProps, ComponentsMap } from './contexts/A2UIProvider'
+
 // ============ Components ============
 
+export { A2UIProvider } from './contexts/A2UIProvider'
 export { A2UIRenderer } from './A2UIRenderer'
 export { ComponentRenderer } from './components/ComponentRenderer'
 
@@ -36,3 +54,4 @@ export { ComponentRenderer } from './components/ComponentRenderer'
 
 export { useDispatchAction } from './hooks/useDispatchAction'
 export { useDataBinding, useFormBinding } from './hooks/useDataBinding'
+export { useA2UIMessageHandler } from './hooks/useA2UIMessageHandler'

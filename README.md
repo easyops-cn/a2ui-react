@@ -22,10 +22,11 @@ First, use the `@source` directive to tell Tailwind to scan the library code for
 @source "../node_modules/@easyops-cn/a2ui-react";
 ```
 
-Next, use the `A2UIRenderer` component to render A2UI messages:
+Next, use `A2UIProvider` and `A2UIRenderer` to render A2UI messages:
 
 ```tsx
 import {
+  A2UIProvider,
   A2UIRenderer,
   type A2UIMessage,
   type A2UIAction,
@@ -38,19 +39,24 @@ function App() {
     console.log('Action received:', action)
   }
 
-  return <A2UIRenderer messages={messages} onAction={handleAction} />
+  return (
+    <A2UIProvider messages={messages} onAction={handleAction}>
+      <A2UIRenderer />
+    </A2UIProvider>
+  )
 }
 ```
 
 ### Custom components
 
-You can override default components or add new custom components via the `components` prop, which takes a `Map<string, React.ComponentType>`.
+You can override default components or add new custom components via the `components` prop on `A2UIProvider`, which takes a `Map<string, React.ComponentType>`.
 
 ```tsx
 import {
+  A2UIProvider,
   A2UIRenderer,
-  A2UIMessage,
-  A2UIAction,
+  type A2UIMessage,
+  type A2UIAction,
 } from '@easyops-cn/a2ui-react/0.8'
 
 const ComponentsMap = new Map<string, React.ComponentType<any>>([
@@ -63,11 +69,13 @@ const ComponentsMap = new Map<string, React.ComponentType<any>>([
 
 function App() {
   return (
-    <A2UIRenderer
+    <A2UIProvider
       components={ComponentsMap}
       messages={messages}
       onAction={handleAction}
-    />
+    >
+      <A2UIRenderer />
+    </A2UIProvider>
   )
 }
 ```

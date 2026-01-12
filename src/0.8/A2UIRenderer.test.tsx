@@ -7,7 +7,8 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { A2UIRenderer, type ComponentsMap } from './A2UIRenderer'
+import { A2UIRenderer } from './A2UIRenderer'
+import { A2UIProvider, type ComponentsMap } from './contexts/A2UIProvider'
 import type { A2UIMessage, BaseComponentProps, Action } from './types'
 import { useDispatchAction } from './hooks/useDispatchAction'
 import { useDataBinding, useFormBinding } from './hooks/useDataBinding'
@@ -82,17 +83,29 @@ function createTestMessages(options: {
 describe('A2UIRenderer', () => {
   describe('Phase 3: User Story 1 - Basic Message Rendering', () => {
     it('T014: renders nothing for empty messages array', () => {
-      const { container } = render(<A2UIRenderer messages={[]} />)
+      const { container } = render(
+        <A2UIProvider messages={[]}>
+          <A2UIRenderer />
+        </A2UIProvider>
+      )
       expect(container.firstChild).toBeNull()
     })
 
     it('T014b: renders nothing for null/undefined messages', () => {
       // @ts-expect-error - testing null handling
-      const { container: c1 } = render(<A2UIRenderer messages={null} />)
+      const { container: c1 } = render(
+        <A2UIProvider messages={null}>
+          <A2UIRenderer />
+        </A2UIProvider>
+      )
       expect(c1.firstChild).toBeNull()
 
       // @ts-expect-error - testing undefined handling
-      const { container: c2 } = render(<A2UIRenderer messages={undefined} />)
+      const { container: c2 } = render(
+        <A2UIProvider messages={undefined}>
+          <A2UIRenderer />
+        </A2UIProvider>
+      )
       expect(c2.firstChild).toBeNull()
     })
 
@@ -109,7 +122,11 @@ describe('A2UIRenderer', () => {
         ],
       })
 
-      render(<A2UIRenderer messages={messages} />)
+      render(
+        <A2UIProvider messages={messages}>
+          <A2UIRenderer />
+        </A2UIProvider>
+      )
 
       expect(screen.getByText('Hello World')).toBeInTheDocument()
     })
@@ -137,7 +154,11 @@ describe('A2UIRenderer', () => {
         ],
       })
 
-      render(<A2UIRenderer messages={messages} />)
+      render(
+        <A2UIProvider messages={messages}>
+          <A2UIRenderer />
+        </A2UIProvider>
+      )
 
       expect(screen.getByText('First')).toBeInTheDocument()
       expect(screen.getByText('Second')).toBeInTheDocument()
@@ -173,7 +194,11 @@ describe('A2UIRenderer', () => {
         },
       ]
 
-      render(<A2UIRenderer messages={messages} />)
+      render(
+        <A2UIProvider messages={messages}>
+          <A2UIRenderer />
+        </A2UIProvider>
+      )
 
       expect(screen.getByText('Surface 1')).toBeInTheDocument()
       expect(screen.getByText('Surface 2')).toBeInTheDocument()
@@ -205,7 +230,11 @@ describe('A2UIRenderer', () => {
         ],
       })
 
-      render(<A2UIRenderer messages={messages} onAction={onAction} />)
+      render(
+        <A2UIProvider messages={messages} onAction={onAction}>
+          <A2UIRenderer />
+        </A2UIProvider>
+      )
 
       const button = screen.getByRole('button')
       await user.click(button)
@@ -242,7 +271,11 @@ describe('A2UIRenderer', () => {
         ],
       })
 
-      render(<A2UIRenderer messages={messages} onAction={onAction} />)
+      render(
+        <A2UIProvider messages={messages} onAction={onAction}>
+          <A2UIRenderer />
+        </A2UIProvider>
+      )
 
       const button = screen.getByRole('button')
       await user.click(button)
@@ -299,7 +332,11 @@ describe('A2UIRenderer', () => {
         ],
       })
 
-      render(<A2UIRenderer messages={messages} onAction={onAction} />)
+      render(
+        <A2UIProvider messages={messages} onAction={onAction}>
+          <A2UIRenderer />
+        </A2UIProvider>
+      )
 
       const buttons = screen.getAllByRole('button')
       await user.click(buttons[0])
@@ -347,7 +384,11 @@ describe('A2UIRenderer', () => {
       })
 
       // No onAction prop
-      render(<A2UIRenderer messages={messages} />)
+      render(
+        <A2UIProvider messages={messages}>
+          <A2UIRenderer />
+        </A2UIProvider>
+      )
 
       const button = screen.getByRole('button')
 
@@ -395,7 +436,11 @@ describe('A2UIRenderer', () => {
         ],
       })
 
-      render(<A2UIRenderer messages={messages} components={customComponents} />)
+      render(
+        <A2UIProvider messages={messages} components={customComponents}>
+          <A2UIRenderer />
+        </A2UIProvider>
+      )
 
       expect(screen.getByTestId('custom-button')).toBeInTheDocument()
       expect(screen.getByText('Hello')).toBeInTheDocument()
@@ -437,7 +482,11 @@ describe('A2UIRenderer', () => {
         ],
       })
 
-      render(<A2UIRenderer messages={messages} components={customComponents} />)
+      render(
+        <A2UIProvider messages={messages} components={customComponents}>
+          <A2UIRenderer />
+        </A2UIProvider>
+      )
 
       expect(screen.getByTestId('custom-button')).toBeInTheDocument()
       expect(screen.getByTestId('custom-text')).toBeInTheDocument()
@@ -471,7 +520,11 @@ describe('A2UIRenderer', () => {
         ],
       })
 
-      render(<A2UIRenderer messages={messages} components={customComponents} />)
+      render(
+        <A2UIProvider messages={messages} components={customComponents}>
+          <A2UIRenderer />
+        </A2UIProvider>
+      )
 
       // Custom button
       expect(screen.getByTestId('custom-button')).toBeInTheDocument()
@@ -509,7 +562,11 @@ describe('A2UIRenderer', () => {
         ],
       })
 
-      render(<A2UIRenderer messages={messages} components={customComponents} />)
+      render(
+        <A2UIProvider messages={messages} components={customComponents}>
+          <A2UIRenderer />
+        </A2UIProvider>
+      )
 
       expect(screen.getByTestId('custom-switch')).toBeInTheDocument()
       expect(screen.getByText('Enable feature')).toBeInTheDocument()
@@ -557,11 +614,13 @@ describe('A2UIRenderer', () => {
       })
 
       render(
-        <A2UIRenderer
+        <A2UIProvider
           messages={messages}
           onAction={onAction}
           components={customComponents}
-        />
+        >
+          <A2UIRenderer />
+        </A2UIProvider>
       )
 
       const checkbox = screen.getByRole('checkbox')
@@ -615,7 +674,11 @@ describe('A2UIRenderer', () => {
         },
       ]
 
-      render(<A2UIRenderer messages={messages} components={customComponents} />)
+      render(
+        <A2UIProvider messages={messages} components={customComponents}>
+          <A2UIRenderer />
+        </A2UIProvider>
+      )
 
       expect(screen.getByTestId('custom-display')).toHaveTextContent(
         'Hello from data model'
@@ -656,7 +719,11 @@ describe('A2UIRenderer', () => {
         },
       ]
 
-      render(<A2UIRenderer messages={messages} components={customComponents} />)
+      render(
+        <A2UIProvider messages={messages} components={customComponents}>
+          <A2UIRenderer />
+        </A2UIProvider>
+      )
 
       expect(screen.getByTestId('custom-display')).toHaveTextContent(
         'fallback value'
@@ -700,7 +767,11 @@ describe('A2UIRenderer', () => {
         },
       ]
 
-      render(<A2UIRenderer messages={messages} components={customComponents} />)
+      render(
+        <A2UIProvider messages={messages} components={customComponents}>
+          <A2UIRenderer />
+        </A2UIProvider>
+      )
 
       expect(screen.getByTestId('custom-input')).toHaveValue('john_doe')
     })
@@ -745,7 +816,11 @@ describe('A2UIRenderer', () => {
         },
       ]
 
-      render(<A2UIRenderer messages={messages} components={customComponents} />)
+      render(
+        <A2UIProvider messages={messages} components={customComponents}>
+          <A2UIRenderer />
+        </A2UIProvider>
+      )
 
       const input = screen.getByTestId('custom-input')
       await user.type(input, 'new_value')
@@ -785,9 +860,81 @@ describe('A2UIRenderer', () => {
         },
       ]
 
-      render(<A2UIRenderer messages={messages} components={customComponents} />)
+      render(
+        <A2UIProvider messages={messages} components={customComponents}>
+          <A2UIRenderer />
+        </A2UIProvider>
+      )
 
       expect(screen.getByTestId('custom-input')).toHaveValue('default_value')
+    })
+  })
+
+  describe('Middleware pattern', () => {
+    it('allows custom middleware component between Provider and Renderer', () => {
+      function CustomMiddleware({ children }: { children: React.ReactNode }) {
+        // Custom middleware can use hooks here
+        return <div data-testid="middleware">{children}</div>
+      }
+
+      const messages = createTestMessages({
+        surfaceId: 'surface-1',
+        root: 'text-1',
+        components: [
+          {
+            id: 'text-1',
+            type: 'Text',
+            props: { text: { literalString: 'Hello World' } },
+          },
+        ],
+      })
+
+      render(
+        <A2UIProvider messages={messages}>
+          <CustomMiddleware>
+            <A2UIRenderer />
+          </CustomMiddleware>
+        </A2UIProvider>
+      )
+
+      expect(screen.getByTestId('middleware')).toBeInTheDocument()
+      expect(screen.getByText('Hello World')).toBeInTheDocument()
+    })
+
+    it('middleware can access A2UI hooks', () => {
+      function CustomMiddleware({ children }: { children: React.ReactNode }) {
+        const dispatchAction = useDispatchAction()
+        return (
+          <div data-testid="middleware" data-has-dispatch={!!dispatchAction}>
+            {children}
+          </div>
+        )
+      }
+
+      const messages = createTestMessages({
+        surfaceId: 'surface-1',
+        root: 'text-1',
+        components: [
+          {
+            id: 'text-1',
+            type: 'Text',
+            props: { text: { literalString: 'Hello World' } },
+          },
+        ],
+      })
+
+      render(
+        <A2UIProvider messages={messages}>
+          <CustomMiddleware>
+            <A2UIRenderer />
+          </CustomMiddleware>
+        </A2UIProvider>
+      )
+
+      expect(screen.getByTestId('middleware')).toHaveAttribute(
+        'data-has-dispatch',
+        'true'
+      )
     })
   })
 })

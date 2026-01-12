@@ -11,13 +11,15 @@ import { A2UIProvider } from './A2UIProvider'
 import { useSurfaceContext } from './SurfaceContext'
 import { useDataModelContext } from './DataModelContext'
 import { useActionContext } from './ActionContext'
+import { useComponentsMapContext } from './ComponentsMapContext'
 import type { ReactNode } from 'react'
+import type { A2UIMessage } from '../types'
 
 describe('A2UIProvider', () => {
   describe('rendering', () => {
     it('should render children', () => {
       render(
-        <A2UIProvider>
+        <A2UIProvider messages={[]}>
           <div data-testid="child">Child content</div>
         </A2UIProvider>
       )
@@ -28,7 +30,7 @@ describe('A2UIProvider', () => {
   describe('context availability', () => {
     // Wrapper for hooks
     const wrapper = ({ children }: { children: ReactNode }) => (
-      <A2UIProvider>{children}</A2UIProvider>
+      <A2UIProvider messages={[]}>{children}</A2UIProvider>
     )
 
     it('should provide SurfaceContext', () => {
@@ -50,6 +52,14 @@ describe('A2UIProvider', () => {
       expect(result.current).toBeDefined()
       expect(result.current.dispatchAction).toBeDefined()
     })
+
+    it('should provide ComponentsMapContext', () => {
+      const { result } = renderHook(() => useComponentsMapContext(), {
+        wrapper,
+      })
+      expect(result.current).toBeDefined()
+      expect(result.current.getComponent).toBeDefined()
+    })
   })
 
   describe('onAction prop', () => {
@@ -57,7 +67,9 @@ describe('A2UIProvider', () => {
       const onAction = vi.fn()
 
       const wrapper = ({ children }: { children: ReactNode }) => (
-        <A2UIProvider onAction={onAction}>{children}</A2UIProvider>
+        <A2UIProvider messages={[]} onAction={onAction}>
+          {children}
+        </A2UIProvider>
       )
 
       const { result } = renderHook(() => useActionContext(), { wrapper })
@@ -81,7 +93,7 @@ describe('A2UIProvider', () => {
       const consoleWarn = vi.spyOn(console, 'warn').mockImplementation(() => {})
 
       const wrapper = ({ children }: { children: ReactNode }) => (
-        <A2UIProvider>{children}</A2UIProvider>
+        <A2UIProvider messages={[]}>{children}</A2UIProvider>
       )
 
       const { result } = renderHook(() => useActionContext(), { wrapper })
@@ -96,6 +108,72 @@ describe('A2UIProvider', () => {
       }).not.toThrow()
 
       consoleWarn.mockRestore()
+    })
+  })
+
+  describe('messages prop', () => {
+    it('should process messages and populate surfaces', () => {
+      const messages: A2UIMessage[] = [
+        { beginRendering: { surfaceId: 'test-surface', root: 'root-1' } },
+        {
+          surfaceUpdate: {
+            surfaceId: 'test-surface',
+            components: [{ id: 'root-1', component: { Text: {} } }],
+          },
+        },
+      ]
+
+      const wrapper = ({ children }: { children: ReactNode }) => (
+        <A2UIProvider messages={messages}>{children}</A2UIProvider>
+      )
+
+      const { result } = renderHook(() => useSurfaceContext(), { wrapper })
+
+      expect(result.current.surfaces.has('test-surface')).toBe(true)
+      expect(result.current.getSurface('test-surface')?.root).toBe('root-1')
+    })
+
+    it('should process data model updates', () => {
+      const messages: A2UIMessage[] = [
+        { beginRendering: { surfaceId: 'test-surface', root: 'root-1' } },
+        {
+          dataModelUpdate: {
+            surfaceId: 'test-surface',
+            path: '/',
+            contents: [{ key: 'name', valueString: 'John' }],
+          },
+        },
+      ]
+
+      const wrapper = ({ children }: { children: ReactNode }) => (
+        <A2UIProvider messages={messages}>{children}</A2UIProvider>
+      )
+
+      const { result } = renderHook(() => useDataModelContext(), { wrapper })
+
+      expect(result.current.getDataValue('test-surface', '/name')).toBe('John')
+    })
+  })
+
+  describe('components prop', () => {
+    it('should provide custom components via ComponentsMapContext', () => {
+      function CustomButton() {
+        return <button>Custom</button>
+      }
+
+      const customComponents = new Map([['Button', CustomButton]])
+
+      const wrapper = ({ children }: { children: ReactNode }) => (
+        <A2UIProvider messages={[]} components={customComponents}>
+          {children}
+        </A2UIProvider>
+      )
+
+      const { result } = renderHook(() => useComponentsMapContext(), {
+        wrapper,
+      })
+
+      expect(result.current.getComponent('Button')).toBe(CustomButton)
     })
   })
 
@@ -149,7 +227,7 @@ describe('A2UIProvider', () => {
       }
 
       render(
-        <A2UIProvider onAction={onAction}>
+        <A2UIProvider messages={[]} onAction={onAction}>
           <TestComponent />
         </A2UIProvider>
       )
@@ -210,7 +288,7 @@ describe('A2UIProvider', () => {
       }
 
       render(
-        <A2UIProvider>
+        <A2UIProvider messages={[]}>
           <TestComponent />
         </A2UIProvider>
       )

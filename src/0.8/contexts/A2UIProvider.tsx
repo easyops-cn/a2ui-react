@@ -3,21 +3,88 @@
  *
  * This component wraps all the necessary context providers for A2UI rendering.
  * It should be placed at the top level of any component tree that uses A2UI.
+ *
+ * @example
+ * ```tsx
+ * import { A2UIProvider, A2UIRenderer, A2UIMessage, A2UIAction } from '@easyops-cn/a2ui-react/0.8'
+ *
+ * function App() {
+ *   const messages: A2UIMessage[] = [...]
+ *   const handleAction = (action: A2UIAction) => {
+ *     console.log('Action:', action)
+ *   }
+ *   return (
+ *     <A2UIProvider messages={messages} onAction={handleAction}>
+ *       <A2UIRenderer />
+ *     </A2UIProvider>
+ *   )
+ * }
+ *
+ * // With custom middleware component
+ * function AppWithMiddleware() {
+ *   return (
+ *     <A2UIProvider messages={messages} onAction={handleAction}>
+ *       <MyCustomMiddleware>
+ *         <A2UIRenderer />
+ *       </MyCustomMiddleware>
+ *     </A2UIProvider>
+ *   )
+ * }
+ * ```
  */
 
-import { type ReactNode } from 'react'
+import { useEffect, type ReactNode, type ComponentType } from 'react'
 import { SurfaceProvider } from './SurfaceContext'
 import { DataModelProvider } from './DataModelContext'
 import { ActionProvider } from './ActionContext'
-import type { ActionHandler } from '../types'
+import { ComponentsMapProvider } from './ComponentsMapContext'
+import { componentRegistry } from '../components/ComponentRenderer'
+import type { ActionHandler, A2UIMessage, BaseComponentProps } from '../types'
+import { useA2UIMessageHandler } from '../hooks/useA2UIMessageHandler'
+
+/**
+ * Type for custom component map.
+ */
+export type ComponentsMap = Map<
+  string,
+  ComponentType<BaseComponentProps & Record<string, unknown>>
+>
 
 /**
  * Props for A2UIProvider.
  */
 export interface A2UIProviderProps {
+  /** Array of A2UI messages to render */
+  messages: A2UIMessage[]
   /** Callback when an action is dispatched */
   onAction?: ActionHandler
+  /** Custom component overrides */
+  components?: ComponentsMap
   children: ReactNode
+}
+
+/**
+ * Internal component that handles message processing.
+ */
+function A2UIMessageProcessor({
+  messages,
+  children,
+}: {
+  messages: A2UIMessage[]
+  children: ReactNode
+}) {
+  const { processMessages, clear } = useA2UIMessageHandler()
+
+  // Process messages when they change
+  useEffect(() => {
+    // Clear existing state and process new messages
+    clear()
+    if (messages && messages.length > 0) {
+      processMessages(messages)
+    }
+  }, [messages, processMessages, clear])
+
+  return <>{children}</>
 }
 
 /**
@@ -27,27 +94,63 @@ export interface A2UIProviderProps {
  * - SurfaceContext: Component tree management
  * - DataModelContext: Data model state
  * - ActionContext: Action dispatching
+ * - ComponentsMapContext: Custom component overrides
+ *
+ * @param props - Component props
+ * @param props.messages - Array of A2UI messages to render
+ * @param props.onAction - Optional callback when an action is dispatched
+ * @param props.components - Optional custom component overrides
+ * @param props.children - Child components (typically A2UIRenderer)
  *
  * @example
  * ```tsx
- * function App() {
- *   const handleAction = (action) => {
- *     console.log('Action:', action);
- *   };
+ * // Basic usage
+ * <A2UIProvider messages={messages} onAction={handleAction}>
+ *   <A2UIRenderer />
+ * </A2UIProvider>
  *
- *   return (
- *     <A2UIProvider onAction={handleAction}>
- *       <A2UIReactRenderer messages={messages} />
- *     </A2UIProvider>
- *   );
- * }
+ * // With custom components
+ * const customComponents = new Map([
+ *   ['Button', CustomButton],
+ *   ['Switch', CustomSwitch],
+ * ])
+ * <A2UIProvider
+ *   messages={messages}
+ *   onAction={handleAction}
+ *   components={customComponents}
+ * >
+ *   <A2UIRenderer />
+ * </A2UIProvider>
+ *
+ * // With custom middleware for hooks access
+ * <A2UIProvider messages={messages} onAction={handleAction}>
+ *   <MyCustomComponent />
+ *   <A2UIRenderer />
+ * </A2UIProvider>
  * ```
  */
-export function A2UIProvider({ onAction, children }: A2UIProviderProps) {
+export function A2UIProvider({
+  messages,
+  onAction,
+  components,
+  children,
+}: A2UIProviderProps) {
+  // Handle null/undefined messages gracefully
+  const safeMessages = messages ?? []
+
   return (
     <SurfaceProvider>
       <DataModelProvider>
-        <ActionProvider onAction={onAction}>{children}</ActionProvider>
+        <ActionProvider onAction={onAction}>
+          <ComponentsMapProvider
+            components={components}
+            defaultComponents={componentRegistry}
+          >
+            <A2UIMessageProcessor messages={safeMessages}>
+              {children}
+            </A2UIMessageProcessor>
+          </ComponentsMapProvider>
+        </ActionProvider>
       </DataModelProvider>
     </SurfaceProvider>
   )

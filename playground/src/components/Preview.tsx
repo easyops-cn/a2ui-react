@@ -1,5 +1,6 @@
 import { Component, type ReactNode } from 'react'
 import {
+  A2UIProvider,
   A2UIRenderer,
   type A2UIMessage,
   type A2UIAction,
@@ -72,7 +73,9 @@ export function Preview({ messages, error, onAction }: PreviewProps) {
 
   return (
     <ErrorBoundary>
-      <A2UIRenderer messages={messages} onAction={onAction} />
+      <A2UIProvider messages={messages} onAction={onAction}>
+        <A2UIRenderer />
+      </A2UIProvider>
     </ErrorBoundary>
   )
 }

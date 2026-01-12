@@ -1,69 +1,62 @@
 /**
- * A2UIRenderer - Main entry component for rendering A2UI messages.
+ * A2UIRenderer - Component for rendering A2UI surfaces.
  *
- * This component processes A2UI messages and renders the resulting UI.
- * It supports custom component overrides via the components prop.
+ * This component renders the surfaces from the A2UI context.
+ * It must be used within an A2UIProvider.
  *
  * @example
  * ```tsx
- * import { A2UIRenderer, A2UIMessage, A2UIAction } from '@easyops-cn/a2ui-react/0.8'
+ * import { A2UIProvider, A2UIRenderer, A2UIMessage, A2UIAction } from '@easyops-cn/a2ui-react/0.8'
  *
  * function App() {
  *   const messages: A2UIMessage[] = [...]
  *   const handleAction = (action: A2UIAction) => {
  *     console.log('Action:', action)
  *   }
- *   return <A2UIRenderer messages={messages} onAction={handleAction} />
+ *   return (
+ *     <A2UIProvider messages={messages} onAction={handleAction}>
+ *       <A2UIRenderer />
+ *     </A2UIProvider>
+ *   )
+ * }
+ *
+ * // With custom middleware component that uses hooks
+ * function AppWithMiddleware() {
+ *   return (
+ *     <A2UIProvider messages={messages} onAction={handleAction}>
+ *       <MyCustomMiddleware>
+ *         <A2UIRenderer />
+ *       </MyCustomMiddleware>
+ *     </A2UIProvider>
+ *   )
  * }
  * ```
  */
 
-import { useEffect, type ComponentType } from 'react'
-import type { A2UIMessage, ActionPayload, BaseComponentProps } from './types'
-import { A2UIProvider } from './contexts/A2UIProvider'
-import { ComponentsMapProvider } from './contexts/ComponentsMapContext'
 import { useSurfaceContext } from './contexts/SurfaceContext'
-import { useA2UIMessageHandler } from './hooks/useA2UIMessageHandler'
-import {
-  ComponentRenderer,
-  componentRegistry,
-} from './components/ComponentRenderer'
+import { ComponentRenderer } from './components/ComponentRenderer'
 
 /**
- * Type for custom component map.
+ * Component for rendering A2UI surfaces.
+ *
+ * Renders all surfaces from the A2UI context. Must be used within an A2UIProvider.
+ *
+ * @example
+ * ```tsx
+ * // Basic usage
+ * <A2UIProvider messages={messages} onAction={handleAction}>
+ *   <A2UIRenderer />
+ * </A2UIProvider>
+ *
+ * // With custom middleware for hooks access
+ * <A2UIProvider messages={messages} onAction={handleAction}>
+ *   <MyCustomComponent />
+ *   <A2UIRenderer />
+ * </A2UIProvider>
+ * ```
  */
-export type ComponentsMap = Map<
-  string,
-  ComponentType<BaseComponentProps & Record<string, unknown>>
->
-
-/**
- * Props for A2UIRenderer component.
- */
-export interface A2UIRenderProps {
-  /** Array of A2UI messages to render */
-  messages: A2UIMessage[]
-  /** Callback when an action is dispatched */
-  onAction?: (action: ActionPayload) => void
-  /** Custom component overrides */
-  components?: ComponentsMap
-}
-
-/**
- * Internal component that handles message processing and surface rendering.
- */
-function A2UIRenderInner({ messages }: { messages: A2UIMessage[] }) {
-  const { processMessages, clear } = useA2UIMessageHandler()
+export function A2UIRenderer() {
   const { surfaces } = useSurfaceContext()
-
-  // Process messages when they change
-  useEffect(() => {
-    // Clear existing state and process new messages
-    clear()
-    if (messages && messages.length > 0) {
-      processMessages(messages)
-    }
-  }, [messages, processMessages, clear])
 
   // Render all surfaces
   const surfaceEntries = Array.from(surfaces.entries())
@@ -91,52 +84,4 @@ function A2UIRenderInner({ messages }: { messages: A2UIMessage[] }) {
   )
 }
 
-/**
- * Main entry component for rendering A2UI messages.
- *
- * Processes an array of A2UIMessage objects and renders the resulting UI.
- * Supports custom component overrides via the components prop.
- *
- * @param props - Component props
- * @param props.messages - Array of A2UI messages to render
- * @param props.onAction - Optional callback when an action is dispatched
- * @param props.components - Optional custom component overrides
- *
- * @example
- * ```tsx
- * // Basic usage
- * <A2UIRenderer messages={messages} onAction={handleAction} />
- *
- * // With custom components
- * const customComponents = new Map([
- *   ['Button', CustomButton],
- *   ['Switch', CustomSwitch],
- * ])
- * <A2UIRenderer
- *   messages={messages}
- *   onAction={handleAction}
- *   components={customComponents}
- * />
- * ```
- */
-export function A2UIRenderer({
-  messages,
-  onAction,
-  components,
-}: A2UIRenderProps) {
-  // Handle null/undefined messages gracefully
-  const safeMessages = messages ?? []
-
-  return (
-    <A2UIProvider onAction={onAction}>
-      <ComponentsMapProvider
-        components={components}
-        defaultComponents={componentRegistry}
-      >
-        <A2UIRenderInner messages={safeMessages} />
-      </ComponentsMapProvider>
-    </A2UIProvider>
-  )
-}
-
-A2UIRenderer.displayName = 'A2UI.Render'
+A2UIRenderer.displayName = 'A2UI.Renderer'

@@ -651,7 +651,7 @@ describe('DividerComponent', () => {
     )
     const separator = container.querySelector('[data-orientation="vertical"]')
     expect(separator).toBeInTheDocument()
-    expect(separator).toHaveClass('h-auto')
+    expect(separator).toHaveClass('self-stretch')
   })
 
   it('should have correct displayName', () => {
