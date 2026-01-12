@@ -55,4 +55,5 @@ export { ComponentRenderer } from './components/ComponentRenderer'
 
 export { useDispatchAction } from './hooks/useDispatchAction'
 export { useDataBinding, useFormBinding } from './hooks/useDataBinding'
-export { useA2UIMessageHandler } from './hooks/useA2UIMessageHandler'
+export { useSurfaceContext } from './contexts/SurfaceContext'
+export { useDataModelContext } from './contexts/DataModelContext'
