@@ -1,15 +1,23 @@
 import { Component, type ReactNode } from 'react'
 import {
-  A2UIProvider,
-  A2UIRenderer,
-  type A2UIMessage,
-  type A2UIAction,
+  A2UIProvider as A2UIProviderV08,
+  A2UIRenderer as A2UIRendererV08,
+  type A2UIMessage as A2UIMessageV08,
+  type A2UIAction as A2UIActionV08,
 } from '@easyops-cn/a2ui-react/0.8'
+import {
+  A2UIProvider as A2UIProviderV09,
+  A2UIRenderer as A2UIRendererV09,
+  type A2UIMessage as A2UIMessageV09,
+  type A2UIAction as A2UIActionV09,
+} from '@easyops-cn/a2ui-react/0.9'
 import { ErrorDisplay } from './ErrorDisplay'
+import type { A2UIVersion } from './VersionSelector'
 
 interface ErrorBoundaryProps {
   children: ReactNode
   onError?: (error: Error) => void
+  resetKey?: string | number
 }
 
 interface ErrorBoundaryState {
@@ -32,7 +40,11 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   componentDidUpdate(prevProps: ErrorBoundaryProps) {
-    if (prevProps.children !== this.props.children && this.state.hasError) {
+    if (
+      (prevProps.children !== this.props.children ||
+        prevProps.resetKey !== this.props.resetKey) &&
+      this.state.hasError
+    ) {
       this.setState({ hasError: false, error: null })
     }
   }
@@ -52,13 +64,17 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 }
 
+type A2UIMessage = A2UIMessageV08 | A2UIMessageV09
+type A2UIAction = A2UIActionV08 | A2UIActionV09
+
 interface PreviewProps {
+  version: A2UIVersion
   messages: A2UIMessage[] | null
   error: string | null
   onAction?: (action: A2UIAction) => void
 }
 
-export function Preview({ messages, error, onAction }: PreviewProps) {
+export function Preview({ version, messages, error, onAction }: PreviewProps) {
   if (error) {
     return <ErrorDisplay title="JSON Parse Error" message={error} />
   }
@@ -71,11 +87,26 @@ export function Preview({ messages, error, onAction }: PreviewProps) {
     )
   }
 
+  if (version === '0.9') {
+    return (
+      <ErrorBoundary resetKey={version}>
+        <A2UIProviderV09
+          messages={messages as A2UIMessageV09[]}
+          onAction={onAction as (action: A2UIActionV09) => void}
+        >
+          <A2UIRendererV09 />
+        </A2UIProviderV09>
+      </ErrorBoundary>
+    )
+  }
+
   return (
-    <ErrorBoundary>
-      <A2UIProvider messages={messages}>
-        <A2UIRenderer onAction={onAction} />
-      </A2UIProvider>
+    <ErrorBoundary resetKey={version}>
+      <A2UIProviderV08 messages={messages as A2UIMessageV08[]}>
+        <A2UIRendererV08
+          onAction={onAction as (action: A2UIActionV08) => void}
+        />
+      </A2UIProviderV08>
     </ErrorBoundary>
   )
 }

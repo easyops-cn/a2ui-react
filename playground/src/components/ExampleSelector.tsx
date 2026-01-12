@@ -1,8 +1,15 @@
 import { useMemo } from 'react'
-import type { Example } from '../data/examples'
+
+interface BaseExample {
+  id: string
+  title: string
+  description: string
+  group?: string
+  messages: unknown[]
+}
 
 interface ExampleSelectorProps {
-  examples: Example[]
+  examples: BaseExample[]
   selectedId: string
   onSelect: (id: string) => void
 }
@@ -13,8 +20,8 @@ export function ExampleSelector({
   onSelect,
 }: ExampleSelectorProps) {
   const groupedExamples = useMemo(() => {
-    const groups: Record<string, Example[]> = {}
-    const ungrouped: Example[] = []
+    const groups: Record<string, BaseExample[]> = {}
+    const ungrouped: BaseExample[] = []
 
     for (const example of examples) {
       if (example.group) {

@@ -535,7 +535,7 @@ export const examples: Example[] = [
               id: 'icon-user',
               component: {
                 Icon: {
-                  name: { literalString: 'user' },
+                  name: { literalString: 'accountCircle' },
                 },
               },
             },

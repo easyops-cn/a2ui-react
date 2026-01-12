@@ -10,7 +10,9 @@ Currently A2UI protocol v0.8 is fully supported. Work on v0.9 is in progress.
 npm install @easyops-cn/a2ui-react
 ```
 
-## Usage
+## V0.8
+
+### Usage
 
 First, use the `@source` directive to tell Tailwind to scan the library code for class names in your global CSS:
 
@@ -43,7 +45,7 @@ function App() {
 }
 ```
 
-### Custom components
+#### Custom components
 
 You can override default components or add new custom components via the `components` prop on `A2UIProvider`, which takes a `Map<string, React.ComponentType>`.
 
@@ -125,6 +127,41 @@ export function CustomSwitchComponent({
     <Switch checked={checked} onChange={handleChange}>
       {labelText}
     </Switch>
+  )
+}
+```
+
+## V0.9
+
+### Usage
+
+First, use the `@source` directive to tell Tailwind to scan the library code for class names in your global CSS:
+
+```css
+@source "../node_modules/@easyops-cn/a2ui-react";
+```
+
+Next, use `A2UIProvider` and `A2UIRenderer` to render A2UI messages:
+
+```tsx
+import {
+  A2UIProvider,
+  A2UIRenderer,
+  type A2UIMessage,
+  type A2UIAction,
+} from '@easyops-cn/a2ui-react/0.9'
+
+function App() {
+  const messages: A2UIMessage[] = []
+
+  const handleAction = (action: A2UIAction) => {
+    console.log('Action received:', action)
+  }
+
+  return (
+    <A2UIProvider messages={messages}>
+      <A2UIRenderer onAction={handleAction} />
+    </A2UIProvider>
   )
 }
 ```
