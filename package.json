@@ -18,6 +18,10 @@
     "./0.8": {
       "types": "./dist/0.8/index.d.ts",
       "default": "./dist/0.8/index.js"
+    },
+    "./0.9": {
+      "types": "./dist/0.9/index.d.ts",
+      "default": "./dist/0.9/index.js"
     }
   },
   "files": [

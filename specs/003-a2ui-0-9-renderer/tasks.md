@@ -26,11 +26,11 @@ Based on plan.md structure:
 
 **Purpose**: Initialize 0.9 module structure and TypeScript types
 
-- [ ] T001 Create directory structure for `src/0.9/` matching plan.md layout
-- [ ] T002 [P] Define TypeScript types for 0.9 protocol messages in `src/0.9/types/index.ts`
-- [ ] T003 [P] Define TypeScript types for all 18 catalog components in `src/0.9/types/index.ts`
-- [ ] T004 [P] Create public API exports in `src/0.9/index.ts` (mirroring 0.8 pattern)
-- [ ] T005 Add `./0.9` export path to `package.json` exports field
+- [x] T001 Create directory structure for `src/0.9/` matching plan.md layout
+- [x] T002 [P] Define TypeScript types for 0.9 protocol messages in `src/0.9/types/index.ts`
+- [x] T003 [P] Define TypeScript types for all 18 catalog components in `src/0.9/types/index.ts`
+- [x] T004 [P] Create public API exports in `src/0.9/index.ts` (mirroring 0.8 pattern)
+- [x] T005 Add `./0.9` export path to `package.json` exports field
 
 ---
 
@@ -40,16 +40,16 @@ Based on plan.md structure:
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T006 Implement JSON Pointer path utilities in `src/0.9/utils/pathUtils.ts` (parse, resolve, create paths)
-- [ ] T007 [P] Write tests for path utilities in `src/0.9/utils/pathUtils.test.ts`
-- [ ] T008 Implement data binding resolution utility in `src/0.9/utils/dataBinding.ts` (literal vs path detection)
-- [ ] T009 [P] Write tests for data binding utilities in `src/0.9/utils/dataBinding.test.ts`
-- [ ] T010 Create ScopeContext for collection scopes in `src/0.9/contexts/ScopeContext.tsx`
-- [ ] T011 [P] Write tests for ScopeContext in `src/0.9/contexts/ScopeContext.test.tsx`
-- [ ] T012 Create ComponentsMapContext for custom component registry in `src/0.9/contexts/ComponentsMapContext.tsx`
-- [ ] T013 Create UnknownComponent fallback in `src/0.9/components/UnknownComponent.tsx`
+- [x] T006 Implement JSON Pointer path utilities in `src/0.9/utils/pathUtils.ts` (parse, resolve, create paths)
+- [x] T007 [P] Write tests for path utilities in `src/0.9/utils/pathUtils.test.ts`
+- [x] T008 Implement data binding resolution utility in `src/0.9/utils/dataBinding.ts` (literal vs path detection)
+- [x] T009 [P] Write tests for data binding utilities in `src/0.9/utils/dataBinding.test.ts`
+- [x] T010 Create ScopeContext for collection scopes in `src/0.9/contexts/ScopeContext.tsx`
+- [x] T011 [P] Write tests for ScopeContext in `src/0.9/contexts/ScopeContext.test.tsx`
+- [x] T012 Create ComponentsMapContext for custom component registry in `src/0.9/contexts/ComponentsMapContext.tsx`
+- [x] T013 Create UnknownComponent fallback in `src/0.9/components/UnknownComponent.tsx`
 
-**Checkpoint**: Foundation ready - user story implementation can now begin in parallel
+**Checkpoint**: Foundation ready - user story implementation can now begin in parallel ✅
 
 ---
 
@@ -67,26 +67,26 @@ Based on plan.md structure:
 
 ### Implementation for User Story 1
 
-- [ ] T017 [US1] Create SurfaceContext with multi-surface state management in `src/0.9/contexts/SurfaceContext.tsx`
-- [ ] T018 [US1] Create ActionContext for onAction callback in `src/0.9/contexts/ActionContext.tsx`
-- [ ] T019 [US1] Implement useA2UIMessageHandler hook in `src/0.9/hooks/useA2UIMessageHandler.ts` (createSurface, updateComponents, deleteSurface, message buffering)
-- [ ] T020 [US1] Create A2UIProvider with multi-surface support in `src/0.9/contexts/A2UIProvider.tsx`
+- [x] T017 [US1] Create SurfaceContext with multi-surface state management in `src/0.9/contexts/SurfaceContext.tsx`
+- [x] T018 [US1] Create ActionContext for onAction callback in `src/0.9/contexts/ActionContext.tsx`
+- [x] T019 [US1] Implement useA2UIMessageHandler hook in `src/0.9/hooks/useA2UIMessageHandler.ts` (createSurface, updateComponents, deleteSurface, message buffering)
+- [x] T020 [US1] Create A2UIProvider with multi-surface support in `src/0.9/contexts/A2UIProvider.tsx`
 - [ ] T021 [P] [US1] Write tests for A2UIProvider in `src/0.9/contexts/A2UIProvider.test.tsx`
-- [ ] T022 [US1] Implement useComponent hook for adjacency list lookup in `src/0.9/hooks/useComponent.ts`
+- [x] T022 [US1] Implement useComponent hook for adjacency list lookup in `src/0.9/hooks/useComponent.ts`
 - [ ] T023 [P] [US1] Write tests for useComponent in `src/0.9/hooks/useComponent.test.tsx`
-- [ ] T024 [US1] Create ComponentRenderer with discriminator-based dispatch in `src/0.9/components/ComponentRenderer.tsx`
-- [ ] T025 [P] [US1] Implement TextComponent in `src/0.9/components/display/TextComponent.tsx` (basic, no interpolation yet)
-- [ ] T026 [P] [US1] Implement RowComponent in `src/0.9/components/layout/RowComponent.tsx` (justify/align props)
-- [ ] T027 [P] [US1] Implement ColumnComponent in `src/0.9/components/layout/ColumnComponent.tsx` (justify/align props)
-- [ ] T028 [P] [US1] Implement ButtonComponent (basic, no checks yet) in `src/0.9/components/interactive/ButtonComponent.tsx`
-- [ ] T029 [US1] Create display components index in `src/0.9/components/display/index.ts`
-- [ ] T030 [US1] Create layout components index in `src/0.9/components/layout/index.ts`
-- [ ] T031 [US1] Create interactive components index in `src/0.9/components/interactive/index.ts`
-- [ ] T032 [US1] Create main components index in `src/0.9/components/index.ts`
-- [ ] T033 [US1] Create A2UIRenderer component in `src/0.9/A2UIRenderer.tsx`
+- [x] T024 [US1] Create ComponentRenderer with discriminator-based dispatch in `src/0.9/components/ComponentRenderer.tsx`
+- [x] T025 [P] [US1] Implement TextComponent in `src/0.9/components/display/TextComponent.tsx` (basic, no interpolation yet)
+- [x] T026 [P] [US1] Implement RowComponent in `src/0.9/components/layout/RowComponent.tsx` (justify/align props)
+- [x] T027 [P] [US1] Implement ColumnComponent in `src/0.9/components/layout/ColumnComponent.tsx` (justify/align props)
+- [x] T028 [P] [US1] Implement ButtonComponent (basic, no checks yet) in `src/0.9/components/interactive/ButtonComponent.tsx`
+- [x] T029 [US1] Create display components index in `src/0.9/components/display/index.ts`
+- [x] T030 [US1] Create layout components index in `src/0.9/components/layout/index.ts`
+- [x] T031 [US1] Create interactive components index in `src/0.9/components/interactive/index.ts`
+- [x] T032 [US1] Create main components index in `src/0.9/components/index.ts`
+- [x] T033 [US1] Create A2UIRenderer component in `src/0.9/A2UIRenderer.tsx`
 - [ ] T034 [P] [US1] Write tests for A2UIRenderer in `src/0.9/A2UIRenderer.test.tsx`
 
-**Checkpoint**: Basic rendering works - can send messages and see Text, Button, Row, Column
+**Checkpoint**: Basic rendering works - can send messages and see Text, Button, Row, Column ✅
 
 ---
 
@@ -103,13 +103,13 @@ Based on plan.md structure:
 
 ### Implementation for User Story 2
 
-- [ ] T037 [US2] Create DataModelContext with path-based updates in `src/0.9/contexts/DataModelContext.tsx`
-- [ ] T038 [US2] Add updateDataModel processing to useA2UIMessageHandler in `src/0.9/hooks/useA2UIMessageHandler.ts`
-- [ ] T039 [US2] Implement useDataBinding hook (resolve literals and paths) in `src/0.9/hooks/useDataBinding.ts`
-- [ ] T040 [US2] Update TextComponent to use useDataBinding for text prop in `src/0.9/components/display/TextComponent.tsx`
-- [ ] T041 [US2] Update ButtonComponent to use useDataBinding for action context in `src/0.9/components/interactive/ButtonComponent.tsx`
+- [x] T037 [US2] Create DataModelContext with path-based updates in `src/0.9/contexts/DataModelContext.tsx` (implemented in SurfaceContext)
+- [x] T038 [US2] Add updateDataModel processing to useA2UIMessageHandler in `src/0.9/hooks/useA2UIMessageHandler.ts`
+- [x] T039 [US2] Implement useDataBinding hook (resolve literals and paths) in `src/0.9/hooks/useDataBinding.ts`
+- [x] T040 [US2] Update TextComponent to use useDataBinding for text prop in `src/0.9/components/display/TextComponent.tsx`
+- [x] T041 [US2] Update ButtonComponent to use useDataBinding for action context in `src/0.9/components/interactive/ButtonComponent.tsx`
 
-**Checkpoint**: Data binding works - components update reactively when data model changes
+**Checkpoint**: Data binding works - components update reactively when data model changes ✅
 
 ---
 
@@ -126,15 +126,15 @@ Based on plan.md structure:
 
 ### Implementation for User Story 3
 
-- [ ] T044 [US3] Implement useFormBinding hook (two-way binding) in `src/0.9/hooks/useDataBinding.ts`
-- [ ] T045 [US3] Implement TextFieldComponent with value binding in `src/0.9/components/interactive/TextFieldComponent.tsx`
-- [ ] T046 [P] [US3] Implement CheckBoxComponent with value binding in `src/0.9/components/interactive/CheckBoxComponent.tsx`
-- [ ] T047 [P] [US3] Implement ChoicePickerComponent with value binding in `src/0.9/components/interactive/ChoicePickerComponent.tsx`
-- [ ] T048 [P] [US3] Implement SliderComponent with value binding in `src/0.9/components/interactive/SliderComponent.tsx`
-- [ ] T049 [P] [US3] Implement DateTimeInputComponent with value binding in `src/0.9/components/interactive/DateTimeInputComponent.tsx`
+- [x] T044 [US3] Implement useFormBinding hook (two-way binding) in `src/0.9/hooks/useDataBinding.ts`
+- [x] T045 [US3] Implement TextFieldComponent with value binding in `src/0.9/components/interactive/TextFieldComponent.tsx`
+- [x] T046 [P] [US3] Implement CheckBoxComponent with value binding in `src/0.9/components/interactive/CheckBoxComponent.tsx`
+- [x] T047 [P] [US3] Implement ChoicePickerComponent with value binding in `src/0.9/components/interactive/ChoicePickerComponent.tsx`
+- [x] T048 [P] [US3] Implement SliderComponent with value binding in `src/0.9/components/interactive/SliderComponent.tsx`
+- [x] T049 [P] [US3] Implement DateTimeInputComponent with value binding in `src/0.9/components/interactive/DateTimeInputComponent.tsx`
 - [ ] T050 [US3] Write integration tests for two-way binding in `src/0.9/components/interactive/interactive.test.tsx`
 
-**Checkpoint**: Two-way binding works - input changes immediately update data model and other bound components
+**Checkpoint**: Two-way binding works - input changes immediately update data model and other bound components ✅
 
 ---
 
@@ -146,17 +146,17 @@ Based on plan.md structure:
 
 ### Tests for User Story 4
 
-- [ ] T051 [P] [US4] Write tests for interpolation utility in `src/0.9/utils/interpolation.test.ts`
-- [ ] T052 [P] [US4] Write tests for useInterpolation hook in `src/0.9/hooks/useInterpolation.test.ts`
+- [x] T051 [P] [US4] Write tests for interpolation utility in `src/0.9/utils/interpolation.test.ts`
+- [x] T052 [P] [US4] Write tests for useInterpolation hook in `src/0.9/hooks/useInterpolation.test.ts` (integrated into resolveString)
 
 ### Implementation for User Story 4
 
-- [ ] T053 [US4] Implement interpolation parser in `src/0.9/utils/interpolation.ts` (regex-based, escape handling)
-- [ ] T054 [US4] Implement useInterpolation hook in `src/0.9/hooks/useInterpolation.ts`
-- [ ] T055 [US4] Update useDataBinding to detect and delegate interpolated strings in `src/0.9/hooks/useDataBinding.ts`
-- [ ] T056 [US4] Update TextComponent to support interpolated text in `src/0.9/components/display/TextComponent.tsx`
+- [x] T053 [US4] Implement interpolation parser in `src/0.9/utils/interpolation.ts` (regex-based, escape handling)
+- [x] T054 [US4] Implement useInterpolation hook in `src/0.9/hooks/useInterpolation.ts` (integrated into resolveString instead)
+- [x] T055 [US4] Update useDataBinding to detect and delegate interpolated strings in `src/0.9/hooks/useDataBinding.ts`
+- [x] T056 [US4] Update TextComponent to support interpolated text in `src/0.9/components/display/TextComponent.tsx` (already uses useStringBinding)
 
-**Checkpoint**: String interpolation works - mixed static/dynamic strings resolve correctly
+**Checkpoint**: String interpolation works - mixed static/dynamic strings resolve correctly ✅
 
 ---
 
@@ -172,13 +172,13 @@ Based on plan.md structure:
 
 ### Implementation for User Story 5
 
-- [ ] T058 [US5] Update RowComponent to support ChildList template binding in `src/0.9/components/layout/RowComponent.tsx`
-- [ ] T059 [US5] Update ColumnComponent to support ChildList template binding in `src/0.9/components/layout/ColumnComponent.tsx`
-- [ ] T060 [US5] Implement ListComponent with template binding and ScopeContext in `src/0.9/components/layout/ListComponent.tsx`
-- [ ] T061 [US5] Update useDataBinding to resolve relative paths within ScopeContext in `src/0.9/hooks/useDataBinding.ts`
+- [x] T058 [US5] Update RowComponent to support ChildList template binding in `src/0.9/components/layout/RowComponent.tsx`
+- [x] T059 [US5] Update ColumnComponent to support ChildList template binding in `src/0.9/components/layout/ColumnComponent.tsx`
+- [x] T060 [US5] Implement ListComponent with template binding and ScopeContext in `src/0.9/components/layout/ListComponent.tsx`
+- [x] T061 [US5] Update useDataBinding to resolve relative paths within ScopeContext in `src/0.9/hooks/useDataBinding.ts` (already implemented)
 - [ ] T062 [US5] Write integration tests for relative/absolute path resolution in `src/0.9/components/layout/layout.test.tsx`
 
-**Checkpoint**: Template binding works - dynamic lists render with correctly scoped data
+**Checkpoint**: Template binding works - dynamic lists render with correctly scoped data ✅
 
 ---
 
@@ -195,11 +195,11 @@ Based on plan.md structure:
 
 ### Implementation for User Story 6
 
-- [ ] T065 [US6] Implement useDispatchAction hook with context resolution in `src/0.9/hooks/useDispatchAction.ts`
-- [ ] T066 [US6] Update ButtonComponent to use useDispatchAction in `src/0.9/components/interactive/ButtonComponent.tsx`
+- [x] T065 [US6] Implement useDispatchAction hook with context resolution in `src/0.9/hooks/useDispatchAction.ts`
+- [x] T066 [US6] Update ButtonComponent to use useDispatchAction in `src/0.9/components/interactive/ButtonComponent.tsx`
 - [ ] T067 [US6] Write integration test for action dispatch with bound context in `src/0.9/hooks/useDispatchAction.test.tsx`
 
-**Checkpoint**: Action dispatch works - buttons dispatch actions with correctly resolved context
+**Checkpoint**: Action dispatch works - buttons dispatch actions with correctly resolved context ✅
 
 ---
 
@@ -243,17 +243,17 @@ Based on plan.md structure:
 
 ### Implementation for User Story 8
 
-- [ ] T081 [P] [US8] Implement ImageComponent in `src/0.9/components/display/ImageComponent.tsx`
-- [ ] T082 [P] [US8] Implement IconComponent in `src/0.9/components/display/IconComponent.tsx`
-- [ ] T083 [P] [US8] Implement VideoComponent in `src/0.9/components/display/VideoComponent.tsx`
-- [ ] T084 [P] [US8] Implement AudioPlayerComponent in `src/0.9/components/display/AudioPlayerComponent.tsx`
-- [ ] T085 [P] [US8] Implement DividerComponent in `src/0.9/components/display/DividerComponent.tsx`
-- [ ] T086 [P] [US8] Implement CardComponent in `src/0.9/components/layout/CardComponent.tsx`
-- [ ] T087 [P] [US8] Implement TabsComponent (tabs array, renamed from tabItems) in `src/0.9/components/layout/TabsComponent.tsx`
-- [ ] T088 [P] [US8] Implement ModalComponent (trigger/content, renamed from entryPointChild/contentChild) in `src/0.9/components/layout/ModalComponent.tsx`
+- [x] T081 [P] [US8] Implement ImageComponent in `src/0.9/components/display/ImageComponent.tsx`
+- [x] T082 [P] [US8] Implement IconComponent in `src/0.9/components/display/IconComponent.tsx`
+- [x] T083 [P] [US8] Implement VideoComponent in `src/0.9/components/display/VideoComponent.tsx`
+- [x] T084 [P] [US8] Implement AudioPlayerComponent in `src/0.9/components/display/AudioPlayerComponent.tsx`
+- [x] T085 [P] [US8] Implement DividerComponent in `src/0.9/components/display/DividerComponent.tsx`
+- [x] T086 [P] [US8] Implement CardComponent in `src/0.9/components/layout/CardComponent.tsx`
+- [x] T087 [P] [US8] Implement TabsComponent (tabs array, renamed from tabItems) in `src/0.9/components/layout/TabsComponent.tsx`
+- [x] T088 [P] [US8] Implement ModalComponent (trigger/content, renamed from entryPointChild/contentChild) in `src/0.9/components/layout/ModalComponent.tsx`
 - [ ] T089 [US8] Write integration tests for all catalog components in `src/0.9/components/display/display.test.tsx` and `src/0.9/components/layout/layout.test.tsx`
 
-**Checkpoint**: All 18 standard catalog components render correctly
+**Checkpoint**: All 18 standard catalog components render correctly ✅
 
 ---
 
