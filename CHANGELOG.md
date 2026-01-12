@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.4](https://github.com/easyops-cn/a2ui-react/compare/v0.0.3...v0.0.4) (2026-01-12)
+
+
+### Bug Fixes
+
+* fix vite external settings ([c255bde](https://github.com/easyops-cn/a2ui-react/commit/c255bde93e72a8afebcafea1cefaf17ce712c4ea))
+
+
+### Miscellaneous Chores
+
+* **main:** release 0.0.4 ([2172cce](https://github.com/easyops-cn/a2ui-react/commit/2172cce5c05febc11686d01379fdecfc57f0b94a))
+
 ## [0.0.3](https://github.com/easyops-cn/a2ui-react/compare/v0.0.2...v0.0.3) (2026-01-12)
 
 
