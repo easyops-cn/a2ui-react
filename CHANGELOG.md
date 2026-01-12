@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.5](https://github.com/easyops-cn/a2ui-react/compare/v0.0.4...v0.0.5) (2026-01-12)
+
+
+### Bug Fixes
+
+* should pack @/ ([8b9ea39](https://github.com/easyops-cn/a2ui-react/commit/8b9ea39c9b310c44d1b5fc4b050a3e510cf5be56))
+
 ## [0.0.4](https://github.com/easyops-cn/a2ui-react/compare/v0.0.3...v0.0.4) (2026-01-12)
 
 
