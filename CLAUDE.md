@@ -43,18 +43,22 @@ npm run build -w playground  # Build playground
 
 ## Library Usage (Downstream API)
 
-The primary entry point is `A2UIRenderer` component:
+The primary entry points are `A2UIProvider` and `A2UIRenderer`:
 
 ```tsx
 import {
+  A2UIProvider,
   A2UIRenderer,
-  A2UIMessage,
-  A2UIAction,
+  type A2UIMessage,
+  type A2UIAction,
 } from '@easyops-cn/a2ui-react/0.8'
-;<A2UIRenderer messages={messages} onAction={handleAction} />
+
+;<A2UIProvider messages={messages}>
+  <A2UIRenderer onAction={handleAction} />
+</A2UIProvider>
 ```
 
-Custom components can override defaults or add new ones via `components` prop (Map<string, React.ComponentType>).
+Custom components can override defaults or add new ones via `components` prop on `A2UIProvider` (Map<string, React.ComponentType>).
 
 Custom components use hooks: `useDispatchAction`, `useDataBinding`, `useFormBinding`, and `ComponentRenderer` for rendering children.
 
@@ -100,6 +104,9 @@ Tests co-located with source (`*.test.tsx`). Uses Vitest + React Testing Library
 TypeScript 5.9, React 19, Radix UI (for UI primitives), Tailwind CSS (via class-variance-authority)
 
 ## Active Technologies
+
+- TypeScript 5.9 + React 19, Radix UI (for UI primitives), Tailwind CSS (via class-variance-authority), lucide-react (icons) (003-a2ui-0-9-renderer)
+- N/A (client-side rendering library) (003-a2ui-0-9-renderer)
 
 - TypeScript 5.9, React 19 + @uiw/react-codemirror (CodeMirror 6), @codemirror/lang-json, @easyops-cn/a2ui-react, Tailwind CSS 4 (002-playground)
 - localStorage (theme preference only) (002-playground)

@@ -1,6 +1,6 @@
 # A2UI React Renderer
 
-![NPM Version](https://img.shields.io/npm/v/%40easyops-cn%2Fa2ui-react)
+[![NPM Version](https://img.shields.io/npm/v/%40easyops-cn%2Fa2ui-react)](https://www.npmjs.com/package/@easyops-cn/a2ui-react)
 
 A React renderer library for [A2UI](https://a2ui.org) protocol.
 
