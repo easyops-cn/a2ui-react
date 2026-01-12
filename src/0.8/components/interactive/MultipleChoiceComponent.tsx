@@ -25,10 +25,12 @@ import { cn } from '@/lib/utils'
 export const MultipleChoiceComponent = memo(function MultipleChoiceComponent({
   surfaceId,
   componentId,
+  label,
   selections,
   options,
   maxAllowedSelections,
 }: MultipleChoiceComponentProps) {
+  const labelText = useDataBinding<string>(surfaceId, label, '')
   const [selectedValue, setSelectedValue] = useFormBinding<string | string[]>(
     surfaceId,
     selections,
@@ -80,6 +82,7 @@ export const MultipleChoiceComponent = memo(function MultipleChoiceComponent({
 
     return (
       <div className={cn('flex flex-col gap-2')}>
+        {labelText && <Label htmlFor={id}>{labelText}</Label>}
         <Select value={currentValue} onValueChange={handleSingleChange}>
           <SelectTrigger id={id}>
             <SelectValue placeholder="Select an option" />
@@ -109,6 +112,7 @@ export const MultipleChoiceComponent = memo(function MultipleChoiceComponent({
 
   return (
     <div className={cn('flex flex-col gap-2')}>
+      {labelText && <Label>{labelText}</Label>}
       {options.map((option) => {
         const isChecked = currentSelections.includes(option.value)
         const isDisabled = !isChecked && isMaxReached

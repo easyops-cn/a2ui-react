@@ -358,6 +358,7 @@ export interface TextFieldComponentProps extends BaseComponentProps {
  * DateTimeInput component properties.
  */
 export interface DateTimeInputComponentProps extends BaseComponentProps {
+  label?: ValueSource
   value?: ValueSource
   enableDate?: boolean
   enableTime?: boolean
@@ -375,6 +376,7 @@ export interface MultipleChoiceOption {
  * MultipleChoice component properties.
  */
 export interface MultipleChoiceComponentProps extends BaseComponentProps {
+  label?: ValueSource
   selections?: ValueSource
   options?: MultipleChoiceOption[]
   maxAllowedSelections?: number
@@ -384,6 +386,7 @@ export interface MultipleChoiceComponentProps extends BaseComponentProps {
  * Slider component properties.
  */
 export interface SliderComponentProps extends BaseComponentProps {
+  label?: ValueSource
   value?: ValueSource
   minValue?: number
   maxValue?: number

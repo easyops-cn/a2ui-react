@@ -7,7 +7,7 @@ import { memo, useCallback, useMemo } from 'react'
 import { CalendarIcon } from 'lucide-react'
 import { format, parse, isValid } from 'date-fns'
 import type { DateTimeInputComponentProps } from '@/0.8/types'
-import { useFormBinding } from '@/0.8/hooks/useDataBinding'
+import { useDataBinding, useFormBinding } from '@/0.8/hooks/useDataBinding'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
@@ -17,6 +17,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 
 /**
  * DateTimeInput component - date/time picker using Calendar and Popover.
@@ -24,10 +25,12 @@ import { Input } from '@/components/ui/input'
 export const DateTimeInputComponent = memo(function DateTimeInputComponent({
   surfaceId,
   componentId,
+  label,
   value,
   enableDate = true,
   enableTime = false,
 }: DateTimeInputComponentProps) {
+  const labelText = useDataBinding<string>(surfaceId, label, '')
   const [dateValue, setDateValue] = useFormBinding<string>(surfaceId, value, '')
 
   // Parse the string value to Date object
@@ -122,6 +125,7 @@ export const DateTimeInputComponent = memo(function DateTimeInputComponent({
   if (enableTime && !enableDate) {
     return (
       <div className={cn('flex flex-col gap-2')}>
+        {labelText && <Label htmlFor={id}>{labelText}</Label>}
         <Input
           id={id}
           type="time"
@@ -135,6 +139,7 @@ export const DateTimeInputComponent = memo(function DateTimeInputComponent({
 
   return (
     <div className={cn('flex flex-col gap-2')}>
+      {labelText && <Label htmlFor={id}>{labelText}</Label>}
       <Popover>
         <PopoverTrigger asChild>
           <Button

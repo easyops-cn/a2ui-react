@@ -73,6 +73,63 @@ function useFormBinding<T = unknown>(
   source: ValueSource | undefined,
   defaultValue?: T
 ): [T, (value: T) => void]
+
+/**
+ * Hook to access the Surface context.
+ * Provides access to surfaces and methods to manage them.
+ * @throws Error if used outside of SurfaceProvider
+ */
+function useSurfaceContext(): SurfaceContextValue
+
+interface SurfaceContextValue {
+  /** Map of all surfaces by surfaceId */
+  surfaces: Map<string, Surface>
+  /** Initializes a surface with root and styles */
+  initSurface: (surfaceId: string, root: string, styles?: SurfaceStyles) => void
+  /** Updates components in a surface */
+  updateSurface: (surfaceId: string, components: ComponentDefinition[]) => void
+  /** Deletes a surface */
+  deleteSurface: (surfaceId: string) => void
+  /** Gets a surface by ID */
+  getSurface: (surfaceId: string) => Surface | undefined
+  /** Gets a component from a surface */
+  getComponent: (
+    surfaceId: string,
+    componentId: string
+  ) => ComponentDefinition | undefined
+  /** Clears all surfaces */
+  clearSurfaces: () => void
+}
+
+/**
+ * Hook to access the DataModel context.
+ * Provides access to data models and methods to manage them.
+ * @throws Error if used outside of DataModelProvider
+ */
+function useDataModelContext(): DataModelContextValue
+
+interface DataModelContextValue {
+  /** Map of data models by surfaceId */
+  dataModels: Map<string, DataModel>
+  /** Updates the data model at a path with merge behavior */
+  updateDataModel: (
+    surfaceId: string,
+    path: string,
+    data: Record<string, unknown>
+  ) => void
+  /** Gets a value from the data model */
+  getDataValue: (surfaceId: string, path: string) => DataModelValue | undefined
+  /** Sets a value in the data model (used by form inputs) */
+  setDataValue: (surfaceId: string, path: string, value: unknown) => void
+  /** Gets the entire data model for a surface */
+  getDataModel: (surfaceId: string) => DataModel
+  /** Initializes the data model for a surface */
+  initDataModel: (surfaceId: string) => void
+  /** Deletes the data model for a surface */
+  deleteDataModel: (surfaceId: string) => void
+  /** Clears all data models */
+  clearDataModels: () => void
+}
 ```
 
 ## Others

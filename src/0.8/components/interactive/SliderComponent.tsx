@@ -4,8 +4,9 @@
 
 import { memo, useCallback } from 'react'
 import type { SliderComponentProps } from '@/0.8/types'
-import { useFormBinding } from '@/0.8/hooks/useDataBinding'
+import { useDataBinding, useFormBinding } from '@/0.8/hooks/useDataBinding'
 import { Slider } from '@/components/ui/slider'
+import { Label } from '@/components/ui/label'
 import { cn } from '@/lib/utils'
 
 /**
@@ -13,10 +14,13 @@ import { cn } from '@/lib/utils'
  */
 export const SliderComponent = memo(function SliderComponent({
   surfaceId,
+  componentId,
+  label,
   value,
   minValue = 0,
   maxValue = 100,
 }: SliderComponentProps) {
+  const labelText = useDataBinding<string>(surfaceId, label, '')
   const [sliderValue, setSliderValue] = useFormBinding<number>(
     surfaceId,
     value,
@@ -32,9 +36,13 @@ export const SliderComponent = memo(function SliderComponent({
     [setSliderValue]
   )
 
+  const id = `slider-${componentId}`
+
   return (
     <div className={cn('flex flex-col gap-2 py-2')}>
+      {labelText && <Label htmlFor={id}>{labelText}</Label>}
       <Slider
+        id={id}
         value={[sliderValue]}
         onValueChange={handleChange}
         min={minValue}
