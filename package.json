@@ -20,6 +20,9 @@
       "default": "./dist/0.8/index.js"
     }
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
