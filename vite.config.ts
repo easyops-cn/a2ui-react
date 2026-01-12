@@ -26,7 +26,7 @@ export default defineConfig({
         id === 'react' ||
         id === 'react-dom' ||
         id === 'react/jsx-runtime' ||
-        (!id.startsWith('.') && !id.startsWith('/')),
+        (!id.startsWith('.') && !id.startsWith('/') && !id.startsWith('@/')),
       output: {
         preserveModules: true,
         preserveModulesRoot: 'src',
